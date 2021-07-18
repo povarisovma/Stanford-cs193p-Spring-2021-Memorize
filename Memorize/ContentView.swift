@@ -14,8 +14,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Memorize").font(.largeTitle)
+            Text(viewModel.title)
             HStack {
-                Text(viewModel.scoreText)
+                Text(viewModel.score)
                 Spacer()
                 flagsAdd
             }
