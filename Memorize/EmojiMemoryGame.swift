@@ -20,7 +20,11 @@ class EmojiMemoryGame : ObservableObject {
     
     static func createMemoryGame(currentTheme: Theme) -> MemoryGame<String> {
         let shuffledEmojis = currentTheme.emojis.shuffled()
-        return MemoryGame<String>(numberOfPairsOfCards: currentTheme.count) { pairIndex in
+        var numberOfCardspair = currentTheme.count
+        if numberOfCardspair > shuffledEmojis.count {
+            numberOfCardspair = shuffledEmojis.count
+        }
+        return MemoryGame<String>(numberOfPairsOfCards: numberOfCardspair) { pairIndex in
             shuffledEmojis[pairIndex]
         }
     }
