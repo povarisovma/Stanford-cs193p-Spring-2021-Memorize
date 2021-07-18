@@ -18,7 +18,7 @@ struct ContentView: View {
             HStack {
                 Text(viewModel.score)
                 Spacer()
-                flagsAdd
+                newGame
             }
             .padding(.horizontal)
             .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
@@ -36,7 +36,7 @@ struct ContentView: View {
             .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
         }
     }
-        var flagsAdd: some View {
+        var newGame: some View {
             Button {
                 viewModel.newgame()
             } label: {
