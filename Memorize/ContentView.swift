@@ -8,26 +8,40 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @State var vehicles = ["🚲", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "🚀", "🚌", "🏍", "🛺", "🛵", "🚗", "🚚", "🛻"]
-//    @State var greetingcards = ["🗾", "🎑", "🏞", "🌅", "🌄", "🌠", "🎇", "🎆", "🌇", "🏙"]
-//    @State var flags = ["🇷🇺", "🇷🇴", "🇵🇦", "🇵🇼", "🇰🇾", "🇳🇴", "🇲🇲", "🇲🇽", "🇲🇬", "🇱🇮", "🇱🇹", "🇱🇷", "🇰🇼"]
     
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                ForEach(viewModel.cards) { card in
-                    CardView(card: card).aspectRatio(2/3, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                        .onTapGesture {
-                            viewModel.choose(card)
-                        }
+        VStack {
+            Text("Memorize").font(.largeTitle)
+            HStack {
+                Text(viewModel.scoreText)
+                Spacer()
+                flagsAdd
+            }
+            .padding(.horizontal)
+            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                    ForEach(viewModel.cards) { card in
+                        CardView(card: card).aspectRatio(2/3, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                            .onTapGesture {
+                                viewModel.choose(card)
+                            }
+                    }
                 }
             }
+            .foregroundColor(viewModel.color)
+            .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
         }
-        .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
-        .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
     }
+        var flagsAdd: some View {
+            Button {
+                viewModel.newgame()
+            } label: {
+                Text("New Game")
+            }
+        }
 }
 
 
